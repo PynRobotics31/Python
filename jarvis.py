@@ -15,8 +15,6 @@ else:
 
 print("How can I assist you")
 
-db = {}
-
 while True:
     a = input("You: ").lower()
 
