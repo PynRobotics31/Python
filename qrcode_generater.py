@@ -1,3 +1,3 @@
 import qrcode
-qr = qrcode.make("happy birthday shayan you are my best friend in the world")
+qr = qrcode.make("This qrcode made in python using qrcode module")
 qr.save("prank.png")
