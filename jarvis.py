@@ -29,7 +29,7 @@ while True:
     elif a == "how are you":
         print("Jarvis: I am just a computer program, but thanks for asking")
 
-    elif a == "exit":
+    elif a == "bye":
         print("Jarvis: Goodbye, have a nice day")
         break
 
