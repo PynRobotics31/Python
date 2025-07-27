@@ -72,7 +72,34 @@ while True:
         print("Jarvis: Searching in YouTube", sy)
         wb.open("https://www.youtube.com/results?search_query=" + sy)
     elif(a.startswith("what is ")):
-    	sum = a[8:]
-    	print(f"Jarvis : the answer is {eval(sum)}")
+        try:
+    	    sum = a[8:]
+    	    print(f"Jarvis : the answer is {eval(sum)}")
+        except:
+            print("Jarvis : There is problem. Please try again later")
+    
+    elif(a == "make task"):
+        todo = []
+        while True:
+            task = input("Enter your task(enter done to skip) : ")
+            if task == "done":
+                print("todo is saved")
+                break
+            todo.append(task)
+    elif(a == "show task"):
+        try:
+            for i in todo:
+                print(i)
+        except:
+            print("Jarvis : no any task is saved")
+    
+    elif(a == "delete task"):
+        del_task = input("Enter thc9e task that you want to delete : ")
+        if del_task in todo:
+            print("Jarvis : task deleted")
+            todo.remove(del_task)
+        else:
+            print("Jarvis : the task is not in list")
+
     else:
-        print("Bot: I don’t understand your command")
+        print("Jarvis: I don’t understand your command")
