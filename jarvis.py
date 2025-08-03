@@ -15,31 +15,32 @@ else:
 
 print("How can I assist you")
 
+hist = []
 while True:
     a = input("You: ").lower()
-
-    if a == "hello":
+    hist.append(a)
+    if(a == "hello" or a=="hi"):
         print("Jarvis: Hi there")
 
-    elif(a == "introduce yourself"):
+    elif(a == "introduce yourself" or a == "who are you"):
     	print("Jarvis : hello i am jarvis your personal ai assistant. I will assist you 24 hours of day and 7 days of week")
 
     elif a == "how are you":
         print("Jarvis: I am just a computer program, but thanks for asking")
 
-    elif a == "bye":
+    elif a == "bye" or a== "exit":
         print("Jarvis: Goodbye, have a nice day")
         break
 
     elif a == "who are you":
-        print("Jarvis: I am your personal AI")
+        print("Jarvis: I am jarvis your personal AI")
 
     elif a.startswith("open "):
         app = a[5:]
         print("Jarvis: Opening", app)
         wb.open(f"https://www.{app}.com")
 
-    elif a == "what is the time":
+    elif a == "what is the time" or a == "tell me the time":
         print("Jarvis: Current time is", time.strftime("%H:%M"))
 
     elif a == "open google maps":
@@ -100,6 +101,28 @@ while True:
             todo.remove(del_task)
         else:
             print("Jarvis : the task is not in list")
-
+            
+    elif(a == "delete all task"):
+    	try:
+    	    for j in todo:
+    		    todo.remove(j)
+    	except:
+    		print("Jarvis : No any taks is saved")
+    elif(a == ""):
+    	pass
+    	
+    elif(a == "history"):
+    	try:
+    		for b in hist:
+    			print(b)
+    	except:
+    		print("Jarvis : Empty history")
+    
+    elif(a == "play my favorite song"):
+    	print("Jarvis : playing your favorite song")
+    	song = "https://youtu.be/Ru7CxHauVFM?si=2V7I9t_isV4jNFya"
+    	wb.open(song)
+    	
     else:
         print("Jarvis: I don’t understand your command")
+
