@@ -8,6 +8,7 @@ import pyjokes
 engine = pyttsx3.init()
 
 def speak(audio):
+	engine.stop() 
 	engine.say(audio)
 	engine.runAndWait()
 
