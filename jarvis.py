@@ -63,9 +63,10 @@ while True:
             data = wiki.summary(query)
             print(f"Jarvis : {data}")
             speak(data)
-        except:
+        except Exception as e:
             print(f"Jarvis : I am sorry but i can't give you the information about {query}")
             speak(f"I am sorry but i can't give you the information about {query}")
+            print(f"Jarvis : The problem is {e}") 
     
     elif(a.startswith("search in youtube ")):
         sy = a[18:]
