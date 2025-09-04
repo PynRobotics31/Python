@@ -144,8 +144,8 @@ while True:
     		print("Groud Level :",data["main"]["grnd_level"])
     		
     	except Exception as e:
-    		print("Jarvis : Sorry sir but i can't give you the weather report. This problem can generate for low internet connection")
-    		print(e)
+    		print(f"Jarvis : Sorry sir but i can't give you the weather report. This problem generate for {e}")
+    	
     		
     else:
         print("Jarvis : Sorry but I can't understand your command")
