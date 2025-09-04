@@ -1,10 +1,11 @@
 import webbrowser as wb
-import wikipedia as wiki
 import pyjokes
 import time
 import os
 import datetime
 import pyttsx3
+import requests
+import json 
 
 def speak(audio):
     engine = pyttsx3.init("sapi5")
@@ -56,6 +57,7 @@ while True:
         wb.open(f"https://{web}.com")
 
     elif(a.startswith("tell me about ")):
+        import wikipedia as wiki
         query = a[14:]
         try:
             data = wiki.summary(query)
@@ -96,7 +98,35 @@ while True:
         print("Jarvis : Ok bye have a nice day")
         speak("Ok bye have a nice day")
         break
-
+    elif(a.startswith("weather report of ")):
+    	temp_query=a[18:]
+    	try:
+    		
+    	    apikey = "7040ea904442a45d6950ba584410ce59"
+    		
+    		baseURL= "https://api.openweathermap.org/data/2.5/weather?q="
+    		
+    		cityname = temp_query
+    		
+    		completeURL = baseURL+ cityname+"&appid=" + apikey
+    		
+    		response =requests.get(completeURL)
+    		
+    		data= response.json()
+    		
+    		print(f"Jarvis : The current weather report of {temp_query}")
+    		
+    		print("Current Tempreture : ",data["main"]["temp"])
+    	
+    		print("Current Tempreture Feels like : ",data["main"]["feels_like"])
+    	
+    		print("Maximum Tempreture : ",data["main"]["temp_max"])
+    	
+    		print("Maximum Tempreture : ",data["main"]["temp_min"])
+    	
+    	except Exception as e:
+    		print("Jarvis : Sorry sir but i can't give you the weather report. This problem can generate for low internet connection")
+    		print(e)
     else:
         print("Jarvis : Sorry but i don't understand your command sir")
         speak("Sorry but i don't understand your command sir")
