@@ -1,11 +1,14 @@
 import pyttsx3
 import webbrowser as wb
+import wikipedia as wiki
 import os
 import time
 import pyjokes
 import datetime
 import requests
 import json
+import pywhatkit
+from deep_translator import GoogleTranslator
 
 def speak(audio):
     engine = pyttsx3.init("sapi5")
@@ -14,8 +17,7 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
     engine.stop()
-   
-
+    
 hour = int(datetime.datetime.now().hour)
 if hour >= 0 and hour < 12:
     print("Good Morning sir")
@@ -52,7 +54,7 @@ while True:
         wb.open(f"https://{web}.com")
 
     elif a.startswith("tell me about "):
-        import wikipedia as wiki
+        
         topic = a[14:]
         try:
             info = wiki.summary(topic, sentences=2)
@@ -134,10 +136,10 @@ while True:
     		
     		data= response.json()
     		
-    		print("Current Tempreture : ",data["main"]["temp"],"°f")    		
-    		print("Current Tempreture Feels like : ",data["main"]["feels_like"],"°f")    		
-    		print("Maximum Tempreture : " ,data["main"]["temp_max"],"°f") 		
-    		print("Maximum Tempreture : ",data["main"]["temp_min"],"°f")   		
+    		print("Current Tempreture : ",data["main"]["temp"])    		
+    		print("Current Tempreture Feels like : ",data["main"]["feels_like"])    		
+    		print("Maximum Tempreture : " ,data["main"]["temp_max"]) 		
+    		print("Maximum Tempreture : ",data["main"]["temp_min"])   		
     		print("Pressure: ",data["main"]["pressure"]) 		
     		print("Humidity : ",data["main"]["humidity"])		
     		print("Sea Level :",data["main"]["sea_level"])
@@ -145,7 +147,44 @@ while True:
     		
     	except Exception as e:
     		print(f"Jarvis : Sorry sir but i can't give you the weather report. This problem generate for {e}")
+    		
+    elif(a.startswith("translate ")):
     	
+    	try:
+    		text = a[10:]
+    		translate = GoogleTranslator(source="auto",target="bn").translate(text)
+    		print(f"Jarvis : Translated Meaning of {text} is : {translate}")
+    		speak(f"Translated Meaning of {text} is {translate}")
+    		
+    	except Exception as e:
+    		print("Jarvis : Sorry cannot translate ")
+    		
+    		print(f"Jarvis : The problem is {e}")
+    		speak("Sorry cannot translate")
+    
+    elif(a.startswith("send message to ")):
+    	
+    	now = datetime.datetime.now()
+    	hour = now.hour
+    	minute = now.minute+1
+    	
+    	users = {
+    	    "shayan":"+918158098686",
+    	    "mom":"+919851807533",
+    	    "sister":"+917319085574",
+    	    "dad":"+918172064168",
+    	    "sayan purakit":"+917908036963"
+    	}
+    	user=a[16:]
+    	if(user in users):
+    		try:
+    			message = input("Jarvis : Enter message to send")
+    			pywhatkit.sendwhatmsg(users[user],message,hour,minute)
+    		except Exception as e:
+    			print(f"Jarvis : Cannot send message to {user}. The problem is {e}")
+    			
+    	else:
+    		print(f"Jarvis : {user} is not saved in chat list")
     		
     else:
         print("Jarvis : Sorry but I can't understand your command")
