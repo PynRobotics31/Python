@@ -1,10 +1,13 @@
 import webbrowser as wb
-import wikipedia as wiki
 import pyjokes
 import time
 import os
 import datetime
 import pyttsx3
+import pywhatkit as kit
+from deep_translator import GoogleTranslator
+import requests 
+import json
 
 def speak(audio):
     engine = pyttsx3.init("sapi5")
@@ -14,13 +17,14 @@ def speak(audio):
 hour = int(datetime.datetime.now().hour)
 if hour >= 0 and hour < 12:
     print("Good Morning sir")
-    
+    speak("Good Morning sir")
 elif hour >= 12 and hour < 18:
     print("Good Afternoon sir")
+    speak("Good Afternoon sir")
 
 else:
     print("Good Evening sir")
-
+    speak("Good Evening sir")
 
 while True:
     a = input('You : ').lower()
@@ -58,11 +62,13 @@ while True:
     elif(a.startswith("tell me about ")):
         query = a[14:]
         try:
+            import wikipedia as wiki
             data = wiki.summary(query)
             print(f"Jarvis : {data}")
             speak(data)
-        except:
+        except Exception as e:
             print(f"Jarvis : I am sorry but i can't give you the information about {query}")
+            print(f"The problem is {e}")
             speak(f"I am sorry but i can't give you the information about {query}")
     
     elif(a.startswith("search in youtube ")):
@@ -77,8 +83,15 @@ while True:
         speak(f"Searching in google {sg}")
         wb.open(f"https://www.google.com/search?q={sg}")
     
+    elif(a.startswith("play ")):
+        song = a[5:]
+        print(f"Jarvis : Playing {song}")
+        speak(f"Playing {song}")
+        wb.open(f"https://music.youtube.com/search?q={song}")
+
+    
     elif(a == "tell me a joke"):
-        joke = pyjokes.get_jokes()
+        joke = pyjokes.get_joke()
         print(f"Jarvis : {joke}")
         speak(joke)
     
@@ -96,6 +109,9 @@ while True:
         print("Jarvis : Ok bye have a nice day")
         speak("Ok bye have a nice day")
         break
+
+    
+            
 
     else:
         print("Jarvis : Sorry but i don't understand your command sir")
