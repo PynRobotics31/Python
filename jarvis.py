@@ -186,7 +186,13 @@ while True:
 
         else:
             print(f"Jarvis : {user} is not saved")
-
+    
+    elif(a.startswith("give me some images of ")):
+        img = a[22:]
+    
+        print(f"Jarvis : Searching for {img} images")
+        speak(f"Searching for {img} images")
+        wb.open(f"https://unsplash.com/s/photos/{img}")
     else:
         print("Jarvis : Sorry but i don't understand your command sir")
         speak("Sorry but i don't understand your command sir")
