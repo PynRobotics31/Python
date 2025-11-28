@@ -8,7 +8,7 @@ import requests
 import json
 import wikipedia as wiki
 from deep_translator import GoogleTranslator
-
+import smtplib
 def speak(audio):
     engine = pyttsx3.init("sapi5")
     engine.say(audio)
@@ -162,27 +162,29 @@ while True:
             print(f"Jarvis : Sorry sir but i can't give you the weather report. This problem generate for {a}")
 
     elif a.startswith("send message to "):
-        now = datetime.datetime.now()
-        hour = now.hour
-        minute = now.minute+1
     
         users = {
-            "shayan":"+918158098686",
-            "mom":"+919851807533",
-            "didi":"+917319085574",
-            "dad":"+919079156032",
-            "swaranya":"+919734823637",
-            "sayan purakit":"+917908036963",
+            
+            "mom":"mitabetal60@gmail.com",
+            "soumyadip da": "soumyabiswas2008@gmail.com"
         }
         user = a[16:]
         if(user in users):
             message = input("Jarvis : Enter the text to send : ")
-            phone = users[user]
+            reciver = users[user]
             try:
-                import pywhatkit as kit
                 
-                kit.sendwhatmsg(users[user],message,hour,minute)
+                
+                connection = smtplib.SMTP("smtp.gmail.com",587)
+                connection.starttls()
+                connection.login("subhamkumarbetal2010@gmail.com","jynv aanv gsox qkah")
+                connection.sendmail(
+                    from_addr="subhamkumarbetal2010@gmail.com",
+                    to_addrs= reciver,
+                    msg=message
+                )
                 print(f"Jarvis : Message Succesfully send to {user}")
+                speak(f"Message Succesfully send to {user}")
             except Exception as g:
                 print(f"Jarvis : Message can't be sended. Problem is {g}")
 
