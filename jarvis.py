@@ -165,8 +165,8 @@ while True:
     
         users = {
             
-            "mom":"mitabetal60@gmail.com",
-            "soumyadip da": "soumyabiswas2008@gmail.com"
+            "mom":"email id",
+            "soumyadip da": "email id"
         }
         user = a[16:]
         if(user in users):
